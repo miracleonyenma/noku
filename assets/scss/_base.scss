@@ -1,0 +1,73 @@
+//  default styles
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	font-family: $regular-font;
+	transition: 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body {
+	margin: 0;
+}
+
+ul {
+	list-style-type: none;
+}
+
+a {
+	color: var(--secondary);
+	text-decoration: unset;
+}
+
+// Classes
+
+.max-width {
+	@each $var in map-get($map: $breakpoints, $key: 'widths') {
+		&--#{$var} {
+			max-width: $var + px;
+			margin: auto;
+		}
+	}
+}
+
+.pad {
+	@for $var from 0 through 8 {
+		&--#{$var} {
+			padding: $defVal * $var;
+		}
+
+		&--x-#{$var} {
+			padding-left: $defVal * $var;
+			padding-right: $defVal * $var;
+		}
+
+		&--y-#{$var} {
+			padding-top: $defVal * $var;
+			padding-bottom: $defVal * $var;
+		}
+	}
+}
+
+// //type
+
+.heading {
+	font-family: $header-font;
+
+	&--lg {
+		font-size: 72px;
+
+		@supports (font-size: clamp(48px, 5vw, 80px)) {
+			font-size: clamp(48px, 5vw, 80px);
+		}
+	}
+}
+
+// containers
+.img-cont {
+	width: 100%;
+
+	img {
+		width: 100%;
+	}
+}

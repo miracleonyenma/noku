@@ -1,63 +1,107 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">noku</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+	<main class="main">
+		<section class="section bday__section pad--x-4">
+			<div class="section__wrapper bday__wrapper max-width--1120">
+				<header class="section__header bday__header">
+					<p class="section__txt bday__txt">You deserve a</p>
+					<!-- prettier-ignore -->
+					<h1 class="section__caption bday__caption">Happy Birthday! ✨</h1>
+				</header>
+				<div class="bday-media__cont">
+					<div class="bday-media__obj bday-media__love-1 img-cont">
+						<img src="/img/love-face.png" alt="" />
+					</div>
+					<div class="bday-media__obj bday-media__baloons img-cont">
+						<img src="/img/baloons.png" alt="" />
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
 </template>
 
 <script>
 export default {}
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+<style lang="scss" scoped>
+@import '~/assets/scss/_utils.scss';
+
+.bday {
+	&__section {
+		height: 100%;
+	}
+
+	&__wrapper {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__caption {
+		font-size: 72px;
+		color: var(--secondary);
+
+		@supports (font-size: clamp(48px, 5vw, 80px)) {
+			font-size: clamp(48px, 5vw, 80px);
+		}
+	}
+
+	&__txt {
+		font-size: 22px;
+	}
 }
 
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
+.bday-media {
+	&__cont {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		overflow: hidden;
+	}
 
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
+	&__obj {
+		position: absolute;
+		max-width: 200px;
+		max-height: 200px;
+		pointer-events: all;
+		animation: float 3s ease-in 0.012s infinite alternate-reverse;
 
-.links {
-  padding-top: 15px;
+		@for $var from 0 through 5 {
+			&:nth-of-type(#{$var}) {
+				animation-duration: $var + s;
+			}
+		}
+	}
+
+	&__baloons {
+		bottom: -$defVal * 2;
+		left: -$defVal;
+	}
+
+	&__love {
+		&-1 {
+			top: -$defVal * 2;
+			right: -$defVal;
+			max-width: 160px;
+		}
+	}
+	@media screen and (min-width: 500px) {
+		&__baloons {
+			max-width: 400px;
+			max-height: 400px;
+		}
+	}
+
+	@keyframes float {
+		from {
+			transform: translateY(0);
+		}
+		to {
+			transform: translateY(#{$defVal + 5px});
+		}
+	}
 }
 </style>
